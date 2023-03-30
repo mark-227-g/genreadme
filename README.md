@@ -1,2 +1,0 @@
-# genreadme
-generate readme
