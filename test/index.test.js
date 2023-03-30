@@ -8,6 +8,7 @@ test('Write README', () => {
 */
 var rspObject = {
   title:"my project",
+  description:"project description",
   email:"mark"
 
 }
