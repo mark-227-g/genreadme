@@ -20,5 +20,13 @@ describe('test genreadme',() => {
   })
 })
 });
+////
+describe('test askquestion',() => {
+  describe('test ask',() => {
+    it('writeReadme should be true',() => {
+        
+  })
+})
+});
 
 

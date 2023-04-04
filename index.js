@@ -6,7 +6,7 @@ function licenseBadge(type)
 {
   return `[![${type}](https://img.shields.io/badge/license-${type}-brightgreen.svg?style=flat-square)](LICENSE.md)`;
 }
-lic=[
+const licenseTypes=[
 {id:'APL',name:'Apache License 2.0'},
 {id:'GNU3',name:'GNU General Public License v3.0'},
 {id:'MIT',name:'MIT License'},
@@ -22,130 +22,186 @@ lic=[
 {id:'Unlicense',name:'The Unlicense'}
 ];
 
+/****************************************
+ 
+ ****************************************/
+class TOC {
+  constructor(){
+  }
+  toc =[];
+  addEntry(item) {
+    this.toc.push(item);
+    //console.log("item"+item);
+   // console.log(this.toc);
+  };
+  render(){
+    var printTOC="";
+    this.toc.forEach(line => {
+      printTOC+=line+"\n\n";
+    });
+    return(printTOC);
+  };
+}
 
-/*********************************** */
+/****************************************
+This function takes the response object as input
+The steps are:
+1) Look in the response object for the values
+to be added to the readme
+2) if the value exists add the value using 
+a template literal.
+3) add a line to the table of contents object.
+ ****************************************/
 function writeReadme(rspObject) {
-  
+  const toc = new TOC();
  // create readme
  var readMe = 
 `# ${rspObject.title}
 
 `;
-// add badges
+//*** add badges ***//
 if((rspObject.license)!=undefined){
   readMe+=licenseBadge("rspObject.license");
 };
 if((rspObject.license)='mit'){
   readMe+=licenseBadge("rspObject.license");
 };
-// add description
+//*** add description ***//
 if(rspObject.description){readMe+=
 `
 
 ## Description
 
 ${rspObject.description}
-`};
+`;
+toc.addEntry("[Description](#description)")};
 
-// add toc
+//*** add toc ***//
 if(true){readMe+=
 `
 ## Table of Contents
 
-<!—TOC—>
+__TOC__
+
 `;}
 
-// add install instructions
-if(rspObject.installInstructions){readMe+=
+//*** add install instructions ***//
+if(rspObject.installInfo){readMe+=
 `
 ## Installation
 
-${rspObject.installInstructions}
-`};
+${rspObject.installInfo}
+`
 
-// add usage info
+toc.addEntry("[Installation](#installation)");
+}
+//***  add usage info ***//
 if(rspObject.usageInfo){readMe+=
 `
 ## Usage
 
 ${rspObject.usageInfo}
-`;}
+`;
+toc.addEntry("[Usage](#usage)")}
 
-// add deployment
+//*** add deployment ***//
 if(rspObject.deployment != undefined){readMe+=
 `
 ### Deployment
 
 ${rspObject.deployment}
-`;}
-
-// add screen shots
+`;
+toc.addEntry("[Deployment](#deployment)")
+};
+//*** add screen shots ***//
 if(true){readMe+=
 `
 ### Screenshots
 
 md  ![alt text](assets/images/screenshot.png)
-`};
+`
 
-// add credits
-if(rspObject.email != undefined){readMe+=
+toc.addEntry("[Screenshots](#screenshots)");
+}
+//***  add credits ***//
+if(rspObject.credits != undefined){readMe+=
 `
 ## Credits
 
-${rspObject.email ? 'x' : 'y'}
-`;}
+${rspObject.credits}
+`;
+toc.addEntry("[Credits](#credits)")}
 
-// add references
-if(rspObject.email != undefined){readMe+=
+//*** add references ***//
+if(rspObject.references != undefined){readMe+=
 `
 ## References
 
+${rspObject.references}
 ${rspObject.email}
-`;}
+`;
+toc.addEntry("[References](#references)")}
 
-// add license text
+//***  add license text ***//
 if(rspObject.licenseText != undefined){readMe+=
 `
 ## License
 
 ${rspObject.licenseText}
-`;}
+`;
+toc.addEntry("[License](#license)")}
 
-// add features
+//***  add features ***//
 if(rspObject.features != undefined){readMe+=
 `
 ## Features
 
 ${rspObject.features}
-`;}
+`;
+toc.addEntry("[Features](#features)")}
 
-// add contrbute guidlines
-if(rspObject.ContribeGuidelines != undefined){readMe+=
+//***  add contrbute guidlines ***//
+if(rspObject.contribeGuidelines != undefined){readMe+=
 `
 ## How to Contribute
 
-${rspObject.ContribeGuidelines}
-`;}
+${rspObject.contribeGuidelines}
+`;
+toc.addEntry("[How to Contribute](#contribute)")}
 
-// add test instructions
+//***  add test instructions ***//
 if(rspObject.testInstructions != undefined){readMe+=
 `
 ## Tests
 
 ${rspObject.testInstructions}
-`;}
+`;
+toc.addEntry("[Tests](#tests)")}
 
 // add feedback
-if(rspObject.github != undefined){readMe+=
+if(rspObject.feedback != undefined){readMe+=
 `
 ## Feedback
 
 ${rspObject.github}
-
 ${rspObject.email}
+${rspObject.feedback}
 `};
 
+/****************************************
+ After the readme has been created using the toc
+ object replace __TOC__ with the contents
+ ****************************************/
+//<!—TOC—>
+//console.log("sss:"+toc.render());
+readMe=readMe.replace("__TOC__",toc.render());
+//readMe+=toc.render();
 // write readme file
+
+/****************************************
+ Write the README.md file to the output folder
+ return true if successful otherwise return false
+ ****************************************/
 fs.writeFile('output/READMEx.md',
  readMe,
  (err) =>
@@ -155,102 +211,68 @@ err ? false : true
   return(true);
 }
 
-/*********************************** */
-function writeReadmex(rspObject) {
-  var mitlicenseBadge="![(https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)";
-  var licenseText="";
-
-  switch(rspObject.license){
-    case "mit" : licenseBadge="(https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)"
-                 licenseText="mit"
-
-  }
-  
- fs.writeFile('output/READMEx.md',
-
-`# ${rspObject.title}
-
-## Badges
-
-[![Software License]${licenseBadge}
-
-## Description
-
-${rspObject.description}
-
-## Table of Contents
-
-<!—TOC—>
-
-## Installation
-
-${rspObject.installInstructions}~~~text
-
-## Usage
-
-${rspObject.usageInfo}
-
-### Deployment
-
-### Screenshots
-
-md  ![alt text](assets/images/screenshot.png)
-
-## Credits
-
-${rspObject.email ? 'x' : 'y'}
-
-## References
-
-${rspObject.email}
-
-## License
-
-${licenseText}
-
-## Features
-
-${rspObject.features}
-
-## How to Contribute
-
-${rspObject.ContribeGuidelines}
-
-## Tests
-
-${rspObject.testInstructions}
-
-## Feedback
-
-${rspObject.github}
-
-${rspObject.email}
-` ,
- (err) =>
-err ? false : true
-
- )
-
-  return(true);
-}
-
-// TODO: Create an array of questions for user input
-
+/****************************************
+ Create an array of questions for user input
+ ****************************************/
 const questions = [
   {
     type: "input",
     name: "title",
-    message: "what is your title?"
-  },
+    message: "What is the project's title?"
+  }
+  ,
+  {
+    type: "input",
+    name: "description",
+    message: "What is the project's description?"
+  }
+  ,
+  {
+    type: "input",
+    name: "installInfo",
+    message: "What are the install instructions?"
+  }
+  ,
+  {
+    type: "input",
+    name: "usageInfo",
+    message: "Enter usage information?"
+  }
+  ,
+  {
+    type: "input",
+    name: "contributGuidelines",
+    message: "Enter contribution guidelines?"
+  }
+  ,
+  {
+    type: "input",
+    name: "testInstructions",
+    message: "Enter test instructions"
+  }
+  ,
   {
     type: "input",
     name: "email",
     message: "what is your email?"
   }
-]
+  ,
+  {
+    type: "list",
+    name: "licenseType",
+    message: "Select your license type",
+    choices: licenseTypes
+  }
+  
+];
 
-
+/****************************************
+ Use inquirer to ask the questions
+ once successfull make a call to the 
+ writeReadme function
+ ****************************************/
 function askQuestions(){
+  console.log("ask");
 inquirer
 .prompt(questions).then((response) => {
     console.log(response);
@@ -259,24 +281,23 @@ inquirer
   });
   return("done");
 };
-module.exports = questions;
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
+/****************************************
+ function to initialize app
+ ****************************************/
 function init() {
 askQuestions();
 }
 
-// Function call to initialize app
-// jest documents https://jestjs.io/docs/getting-started
-//init();
+/****************************************
+ The init function is run when the process starts
+ ****************************************/
+init();
 
-// jest test
-function sum(a, b) {
-    return a + b;
-  }
-module.exports={sum,writeReadme};
+/****************************************
+ export modules for testing with jest
+ ****************************************/
+module.exports={writeReadme,questions};
 
 
 

@@ -4,7 +4,7 @@ assets/.DS_Store
 # output
 output
 # test
-test
+#test
 # Logs
 logs
 *.log
