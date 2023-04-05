@@ -7,9 +7,20 @@ test('Write README', () => {
 });
 */
 var rspObject = {
-  title:"my project",
-  description:"project description",
-  email:"mark"
+  title:"My project",
+  description:"The project is to generate a readme file",
+  installInfo:"Copy to folder",
+  usageInfo:"use it to build file",
+  credits:"Here are the credits",
+  contributeGuidelines:"Contribute by sending email",
+  email:"m@abc.com",
+  testInstructions:"Test it by running node index",
+  licenceType:"MIT License",
+  features:"here are features",
+  deployment:"here is deployment",
+  feedback:"enter feedback",
+  references:"here are references",
+  github:"my github"
 
 }
 describe('test genreadme',() => {
@@ -20,13 +31,6 @@ describe('test genreadme',() => {
   })
 })
 });
-////
-describe('test askquestion',() => {
-  describe('test ask',() => {
-    it('writeReadme should be true',() => {
-        
-  })
-})
-});
+
 
 

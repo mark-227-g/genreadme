@@ -37,7 +37,7 @@ class TOC {
   render(){
     var printTOC="";
     this.toc.forEach(line => {
-      printTOC+=line+"\n\n";
+      printTOC+="- "+line+"\n";
     });
     return(printTOC);
   };
@@ -57,19 +57,11 @@ function writeReadme(rspObject) {
  // create readme
  var readMe = 
 `# ${rspObject.title}
-
 `;
-//*** add badges ***//
-if((rspObject.license)!=undefined){
-  readMe+=licenseBadge("rspObject.license");
-};
-if((rspObject.license)='mit'){
-  readMe+=licenseBadge("rspObject.license");
-};
+
 //*** add description ***//
 if(rspObject.description){readMe+=
 `
-
 ## Description
 
 ${rspObject.description}
@@ -81,9 +73,7 @@ if(true){readMe+=
 `
 ## Table of Contents
 
-__TOC__
-
-`;}
+__TOC__`;}
 
 //*** add install instructions ***//
 if(rspObject.installInfo){readMe+=
@@ -92,7 +82,6 @@ if(rspObject.installInfo){readMe+=
 
 ${rspObject.installInfo}
 `
-
 toc.addEntry("[Installation](#installation)");
 }
 //***  add usage info ***//
@@ -103,34 +92,80 @@ if(rspObject.usageInfo){readMe+=
 ${rspObject.usageInfo}
 `;
 toc.addEntry("[Usage](#usage)")}
+//*** add screen shots ***//
+if(true){readMe+=
+`
+### Screenshots
+  
+md  ![alt text](assets/images/screenshot.png)
+`
+  toc.addEntry("[Screenshots](#screenshots)");
+  }
+  
+//***  add credits ***//
+if(rspObject.credits != undefined){readMe+=
+`
+## Credits
+  
+${rspObject.credits}
+`;
+  toc.addEntry("[Credits](#credits)")}
+  
+  //***  add license text ***//
+if(rspObject.licenseType != undefined){readMe+=
+`
+## License
+  
+${rspObject.licenseType}
+`;
+  toc.addEntry("[License](#license)")}
 
+  //*** add badges ***//
+  if((rspObject.licenseType)!=undefined){
+    readMe+=
+`
+${licenseBadge("rspObject.licenseType")}
+`
+  };
+
+
+  //***  add features ***//
+if(rspObject.features != undefined){readMe+=
+`
+## Features
+  
+${rspObject.features}
+`;
+  toc.addEntry("[Features](#features)")}
+
+  //***  add contrbute guidlines ***//
+if(rspObject.contribeGuidelines != undefined){readMe+=
+`
+## How to Contribute
+  
+${rspObject.contribeGuidelines}
+`;
+  toc.addEntry("[How to Contribute](#how to Contribute)")}
+  
+//***  add test instructions ***//
+if(rspObject.testInstructions != undefined){readMe+=
+`
+## Tests
+  
+${rspObject.testInstructions}
+`;
+  toc.addEntry("[Tests](#tests)")};
+  
 //*** add deployment ***//
 if(rspObject.deployment != undefined){readMe+=
 `
-### Deployment
+## Deployment
 
 ${rspObject.deployment}
 `;
 toc.addEntry("[Deployment](#deployment)")
 };
-//*** add screen shots ***//
-if(true){readMe+=
-`
-### Screenshots
 
-md  ![alt text](assets/images/screenshot.png)
-`
-
-toc.addEntry("[Screenshots](#screenshots)");
-}
-//***  add credits ***//
-if(rspObject.credits != undefined){readMe+=
-`
-## Credits
-
-${rspObject.credits}
-`;
-toc.addEntry("[Credits](#credits)")}
 
 //*** add references ***//
 if(rspObject.references != undefined){readMe+=
@@ -142,42 +177,6 @@ ${rspObject.email}
 `;
 toc.addEntry("[References](#references)")}
 
-//***  add license text ***//
-if(rspObject.licenseText != undefined){readMe+=
-`
-## License
-
-${rspObject.licenseText}
-`;
-toc.addEntry("[License](#license)")}
-
-//***  add features ***//
-if(rspObject.features != undefined){readMe+=
-`
-## Features
-
-${rspObject.features}
-`;
-toc.addEntry("[Features](#features)")}
-
-//***  add contrbute guidlines ***//
-if(rspObject.contribeGuidelines != undefined){readMe+=
-`
-## How to Contribute
-
-${rspObject.contribeGuidelines}
-`;
-toc.addEntry("[How to Contribute](#contribute)")}
-
-//***  add test instructions ***//
-if(rspObject.testInstructions != undefined){readMe+=
-`
-## Tests
-
-${rspObject.testInstructions}
-`;
-toc.addEntry("[Tests](#tests)")}
-
 // add feedback
 if(rspObject.feedback != undefined){readMe+=
 `
@@ -186,8 +185,8 @@ if(rspObject.feedback != undefined){readMe+=
 ${rspObject.github}
 ${rspObject.email}
 ${rspObject.feedback}
-`};
-
+`
+toc.addEntry("[Feedback](#feedback)")};
 /****************************************
  After the readme has been created using the toc
  object replace __TOC__ with the contents
@@ -275,18 +274,21 @@ function askQuestions(){
   console.log("ask");
 inquirer
 .prompt(questions).then((response) => {
-    console.log(response);
-    
-    writeReadme(response);
+    return(response);
   });
-  return("done");
+
 };
 
 /****************************************
  function to initialize app
  ****************************************/
 function init() {
-askQuestions();
+ 
+var rsp=askQuestions();
+if(rsp){
+  writeReadme(rsp);
+}
+
 }
 
 /****************************************
@@ -297,7 +299,7 @@ init();
 /****************************************
  export modules for testing with jest
  ****************************************/
-module.exports={writeReadme,questions};
+module.exports={writeReadme};
 
 
 
