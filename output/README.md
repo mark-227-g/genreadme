@@ -1,5 +1,7 @@
 # My project
 
+[![GNU3](https://img.shields.io/badge/license-GNU3-brightgreen.svg?style=flat-square)](LICENSE.md)
+
 ## Description
 
 The project is to generate a readme file
@@ -11,11 +13,12 @@ The project is to generate a readme file
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Credits](#credits)
+- [License](#license)
 - [Features](#features)
 - [Tests](#tests)
 - [Deployment](#deployment)
 - [References](#references)
-- [Feedback](#feedback)
+- [questions](#questions)
 
 ## Installation
 
@@ -27,11 +30,15 @@ use it to build file
 
 ### Screenshots
   
-md  ![alt text](assets/images/screenshot.png)
+![alt text](assets/images/screenshot.png)
 
 ## Credits
   
 Here are the credits
+
+## License
+  
+GNU General Public License v3.0
 
 ## Features
   
@@ -50,8 +57,9 @@ here is deployment
 here are references
 m@abc.com
 
-## Feedback
+## Questions
 
-my github
-m@abc.com
-send me feedback
+If you have any questions please email me at m@abc.com
+
+GitHub: [https://github.com/mark-227-g](https://github.com/mark-227-g)
+

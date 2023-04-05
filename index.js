@@ -64,6 +64,15 @@ function writeReadme(rspObject) {
  var readMe = 
 `# ${rspObject.title}
 `;
+  //*** add badges ***//
+  if((rspObject.licenseType)!=undefined){
+    readMe+=
+`
+${licenseBadge(rspObject.licenseType)}
+`
+  };
+
+
 
 //*** add description ***//
 if(rspObject.description){readMe+=
@@ -103,7 +112,7 @@ if(true){readMe+=
 `
 ### Screenshots
   
-md  ![alt text](assets/images/screenshot.png)
+![alt text](assets/images/screenshot.png)
 `
   toc.addEntry("[Screenshots](#screenshots)");
   }
@@ -122,18 +131,9 @@ if(rspObject.licenseType != undefined){readMe+=
 `
 ## License
   
-${rspObject.licenseType}
+${(licenseTypes.find((licenseName) => licenseName.id==rspObject.licenseType)).name}
 `;
   toc.addEntry("[License](#license)")}
-
-  //*** add badges ***//
-  if((rspObject.licenseType)!=undefined){
-    readMe+=
-`
-${licenseBadge("rspObject.licenseType")}
-`
-  };
-
 
   //***  add features ***//
 if(rspObject.features != undefined){readMe+=
@@ -147,7 +147,7 @@ ${rspObject.features}
   //***  add contrbute guidlines ***//
 if(rspObject.contribeGuidelines != undefined){readMe+=
 `
-## How to Contribute
+## Contributing
   
 ${rspObject.contribeGuidelines}
 `;
@@ -183,16 +183,17 @@ ${rspObject.email}
 `;
 toc.addEntry("[References](#references)")}
 
-// add feedback
-if(rspObject.feedback != undefined){readMe+=
+// add Questions
+if(rspObject.email != undefined){readMe+=
 `
-## Feedback
+## Questions
 
-${rspObject.github}
-${rspObject.email}
-${rspObject.feedback}
+If you have any questions please email me at ${rspObject.email}
+
+GitHub: [${rspObject.github}](${rspObject.github})
+
 `
-toc.addEntry("[Feedback](#feedback)")};
+toc.addEntry("[questions](#questions)")};
 
 /****************************************
  After the readme has been created using the toc

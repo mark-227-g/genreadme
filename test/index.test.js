@@ -9,12 +9,12 @@ var rspObject = {
   contributeGuidelines:"Contribute by sending email",
   email:"m@abc.com",
   testInstructions:"Test it by running node index",
-  licenceType:"MIT License",
+  licenseType:"GNU3",
   features:"here are features",
   deployment:"here is deployment",
   feedback:"send me feedback",
   references:"here are references",
-  github:"my github"
+  github:"https://github.com/mark-227-g"
 };
 
   describe('test genreadme',() => {
