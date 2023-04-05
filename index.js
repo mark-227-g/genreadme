@@ -1,11 +1,18 @@
-// TODO: Include packages needed for this application
+// Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs")
 
+/****************************************
+ Function to create the license badge
+ ****************************************/
 function licenseBadge(type)
 {
   return `[![${type}](https://img.shields.io/badge/license-${type}-brightgreen.svg?style=flat-square)](LICENSE.md)`;
 }
+
+/****************************************
+ Array of license types
+ ****************************************/
 const licenseTypes=[
 {id:'APL',name:'Apache License 2.0'},
 {id:'GNU3',name:'GNU General Public License v3.0'},
@@ -23,7 +30,8 @@ const licenseTypes=[
 ];
 
 /****************************************
- 
+ This class is used for creating the 
+ table of contents
  ****************************************/
 class TOC {
   constructor(){
@@ -31,8 +39,6 @@ class TOC {
   toc =[];
   addEntry(item) {
     this.toc.push(item);
-    //console.log("item"+item);
-   // console.log(this.toc);
   };
   render(){
     var printTOC="";
@@ -187,28 +193,25 @@ ${rspObject.email}
 ${rspObject.feedback}
 `
 toc.addEntry("[Feedback](#feedback)")};
+
 /****************************************
  After the readme has been created using the toc
  object replace __TOC__ with the contents
  ****************************************/
-//<!—TOC—>
-//console.log("sss:"+toc.render());
 readMe=readMe.replace("__TOC__",toc.render());
-//readMe+=toc.render();
-// write readme file
 
 /****************************************
  Write the README.md file to the output folder
  return true if successful otherwise return false
  ****************************************/
-fs.writeFile('output/READMEx.md',
+fs.writeFile('output/README.md',
  readMe,
  (err) =>
 err ? false : true
 
  )
   return(true);
-}
+};
 
 /****************************************
  Create an array of questions for user input
@@ -265,22 +268,24 @@ const questions = [
   
 ];
 
+
 /****************************************
  Use inquirer to ask the questions
  once successfull make a call to the 
  writeReadme function
  ****************************************/
 function askQuestions(){
-  console.log("ask");
+
 inquirer
 .prompt(questions).then((response) => {
     return(response);
   });
-
 };
 
 /****************************************
- function to initialize app
+ function to initialize app init will first
+ ask the questions. if the function is 
+ successful then write the readme file
  ****************************************/
 function init() {
  
@@ -292,14 +297,17 @@ if(rsp){
 }
 
 /****************************************
- The init function is run when the process starts
+ The init function is run when the process 
+ starts. It is the first thing run when
+ the node application begins
  ****************************************/
 init();
+
 
 /****************************************
  export modules for testing with jest
  ****************************************/
-module.exports={writeReadme};
+module.exports=writeReadme;
 
 
 

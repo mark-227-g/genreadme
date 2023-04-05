@@ -1,11 +1,5 @@
-const {writeReadme} = require('../index.js');
+const writeReadme = require('../index.js');
 
-/*
-test('Write README', () => {
-  const readme = new Readme;
-  expect(readme.writeReadme()).toBe(true);
-});
-*/
 var rspObject = {
   title:"My project",
   description:"The project is to generate a readme file",
@@ -18,18 +12,17 @@ var rspObject = {
   licenceType:"MIT License",
   features:"here are features",
   deployment:"here is deployment",
-  feedback:"enter feedback",
+  feedback:"send me feedback",
   references:"here are references",
   github:"my github"
+};
 
-}
-describe('test genreadme',() => {
-  describe('test writeReadme',() => {
-    it('writeReadme should be true',() => {
-            //const readmeData = new ReadmeData;
-    expect(writeReadme(rspObject)).toEqual(true);
+  describe('test genreadme',() => {
+    describe('test writeReadme',() => {
+      it('writeReadme should be true',() => {
+        expect(writeReadme(rspObject)).toEqual(true);
+    })
   })
-})
 });
 
 
