@@ -1,10 +1,10 @@
-# My project
+# this is my title
 
-[![GNU3](https://img.shields.io/badge/license-GNU3-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
 ## Description
 
-The project is to generate a readme file
+this is my description
 
 ## Table of Contents
 
@@ -12,54 +12,32 @@ The project is to generate a readme file
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Credits](#credits)
 - [License](#license)
-- [Features](#features)
 - [Tests](#tests)
-- [Deployment](#deployment)
-- [References](#references)
-- [questions](#questions)
+- [Questions](#questions)
 
 ## Installation
 
-Copy to folder
+this is how to install
 
 ## Usage
 
-use it to build file
+this is how to use
 
 ### Screenshots
   
 ![alt text](assets/images/screenshot.png)
 
-## Credits
-  
-Here are the credits
-
 ## License
   
-GNU General Public License v3.0
-
-## Features
-  
-here are features
+MIT License
 
 ## Tests
   
-Test it by running node index
-
-## Deployment
-
-here is deployment
-
-## References
-
-here are references
-m@abc.com
+this is how to test
 
 ## Questions
 
-If you have any questions please email me at m@abc.com
+If you have any questions please email me at marko65e@gmail.com
 
-GitHub: [https://github.com/mark-227-g](https://github.com/mark-227-g)
-
+GitHub: [http:mygithub.com](http:mygithub.com)

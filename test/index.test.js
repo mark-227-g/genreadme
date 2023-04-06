@@ -6,7 +6,7 @@ var rspObject = {
   installInfo:"Copy to folder",
   usageInfo:"use it to build file",
   credits:"Here are the credits",
-  contributeGuidelines:"Contribute by sending email",
+  contribeGuidelines:"Contribute by sending email to m@abc.com",
   email:"m@abc.com",
   testInstructions:"Test it by running node index",
   licenseType:"GNU3",

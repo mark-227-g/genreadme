@@ -7,8 +7,11 @@ const fs = require("fs")
  ****************************************/
 function licenseBadge(type)
 {
-  return `[![${type}](https://img.shields.io/badge/license-${type}-brightgreen.svg?style=flat-square)](LICENSE.md)`;
+  const n = licenseTypes.find(item => item.name == type).id
+  return `[![${n}](https://img.shields.io/badge/license-${n}-brightgreen.svg?style=flat-square)](LICENSE.md)`;
 }
+
+ 
 
 /****************************************
  Array of license types
@@ -59,6 +62,7 @@ a template literal.
 3) add a line to the table of contents object.
  ****************************************/
 function writeReadme(rspObject) {
+  console.log("write")
   const toc = new TOC();
  // create readme
  var readMe = 
@@ -71,8 +75,6 @@ function writeReadme(rspObject) {
 ${licenseBadge(rspObject.licenseType)}
 `
   };
-
-
 
 //*** add description ***//
 if(rspObject.description){readMe+=
@@ -131,7 +133,7 @@ if(rspObject.licenseType != undefined){readMe+=
 `
 ## License
   
-${(licenseTypes.find((licenseName) => licenseName.id==rspObject.licenseType)).name}
+${rspObject.licenseType}
 `;
   toc.addEntry("[License](#license)")}
 
@@ -191,9 +193,8 @@ if(rspObject.email != undefined){readMe+=
 If you have any questions please email me at ${rspObject.email}
 
 GitHub: [${rspObject.github}](${rspObject.github})
-
 `
-toc.addEntry("[questions](#questions)")};
+toc.addEntry("[Questions](#questions)")};
 
 /****************************************
  After the readme has been created using the toc
@@ -261,6 +262,12 @@ const questions = [
   }
   ,
   {
+    type: "input",
+    name: "github",
+    message: "what is your github?"
+  }
+  ,
+  {
     type: "list",
     name: "licenseType",
     message: "Select your license type",
@@ -272,15 +279,21 @@ const questions = [
 
 /****************************************
  Use inquirer to ask the questions
- once successfull make a call to the 
+ once successful make a call to the 
  writeReadme function
  ****************************************/
 function askQuestions(){
 
 inquirer
-.prompt(questions).then((response) => {
-    return(response);
-  });
+.prompt(questions)
+.then(response => {
+  //return(response);
+  //console.log(response);
+  //return(response);
+  console.log(response);
+  writeReadme(response);
+  })
+
 };
 
 /****************************************
@@ -289,13 +302,12 @@ inquirer
  successful then write the readme file
  ****************************************/
 function init() {
- 
-var rsp=askQuestions();
-if(rsp){
-  writeReadme(rsp);
+  askQuestions();
+  //console.log(rsp)
 }
 
-}
+
+
 
 /****************************************
  The init function is run when the process 
