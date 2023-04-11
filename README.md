@@ -49,6 +49,10 @@ THEN I am taken to the corresponding section of the README
 * inquirer
 * jest
 
+#### Project Files:
+* [Sample output README.md](https://github.com/mark-227-g/genreadme/blob/main/output/README.md)
+* [Link to Video](https://github.com/mark-227-g/genreadme/blob/main/video)
+
 #### References:
  * [node.js documentation](https://nodejs.org/dist/latest-v19.x/docs/api/)
  * [npm documentation](https://docs.npmjs.com)
